@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { FaHome, FaTable, FaMoneyBill } from "react-icons/fa";
+import { FaHome, FaTable, FaMoneyBill, FaDollarSign } from "react-icons/fa";
 import { FaTableCells } from "react-icons/fa6";
 import { SlGraph } from "react-icons/sl";
 
@@ -25,6 +25,20 @@ const Sidebar = (props: Props) => {
             >
               <FaTable />
               <h6 className="ml-3">Income Statement</h6>
+            </Link>
+            <Link
+              to="balance-sheet"
+              className="flex md:min-w-full text-blueGray-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline"
+            >
+              <FaDollarSign />
+              <h6 className="ml-3">Balance Sheet</h6>
+            </Link>
+            <Link
+              to="cashflow-statement"
+              className="flex md:min-w-full text-blueGray-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline"
+            >
+              <FaDollarSign />
+              <h6 className="ml-3">Cashflow Statement</h6>
             </Link>
           </div>
         </div>

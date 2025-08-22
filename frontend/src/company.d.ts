@@ -327,7 +327,7 @@ export interface Dividend {
 
 export interface CompanyCompData {
   symbol: string;
-  peersList: string[];
+  //peersList: string[];
 }
 
 export interface CompanyTenK {
@@ -335,7 +335,7 @@ export interface CompanyTenK {
   fillingDate: string;
   acceptedDate: string;
   cik: string;
-  type: string;
+  formType: string;
   link: string;
   finalLink: string;
 }
