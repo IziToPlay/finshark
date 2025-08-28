@@ -1,3 +1,4 @@
+using api.Controllers.Helpers;
 using api.data;
 using api.Dtos.Comment;
 using api.Interfaces;
@@ -15,14 +16,26 @@ namespace api.Repository
             _context = context;
         }
 
-        public async Task<List<Comment>> GetAllAsync()
+        public async Task<List<Comment>> GetAllAsync(CommentQueryObject queryObject)
         {
-            return await _context.Comments.ToListAsync();
+            var comments = _context.Comments.Include(a => a.AppUser).AsQueryable();
+
+            if (!string.IsNullOrEmpty(queryObject.Symbol))
+            {
+                comments = comments.Where(c => c.Stock!.Symbol == queryObject.Symbol);
+            }
+
+            if (queryObject.IsDescending == true)
+            {
+                comments = comments.OrderByDescending(c => c.CreatedOn);
+            }
+            
+            return await comments.ToListAsync();
         }
 
         public async Task<Comment?> GetByIdAsync(int id)
         {
-            return await _context.Comments.FindAsync(id);
+            return await _context.Comments.Include(a => a.AppUser).FirstOrDefaultAsync(c => c.Id == id);
         }
 
         public async Task<Comment> CreateAsync(Comment commentModel)
@@ -35,7 +48,7 @@ namespace api.Repository
 
         public async Task<Comment?> UpdateAsync(int id, Comment commentModel)
         {
-            var existingComment = await _context.Comments.FirstOrDefaultAsync(x => x.Id == id);
+            var existingComment = await _context.Comments.FindAsync(id);
 
             if (existingComment == null)
             {

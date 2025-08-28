@@ -1,6 +1,10 @@
+using System;
+using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 using System.Security.Claims;
 using System.Text;
+using System.Threading.Tasks;
 using api.Interfaces;
 using api.Models;
 using Microsoft.IdentityModel.Tokens;
@@ -9,7 +13,7 @@ namespace api.Service
 {
     public class TokenService : ITokenService
     {
-        public readonly IConfiguration _config;
+        private readonly IConfiguration _config;
         private readonly SymmetricSecurityKey _key;
 
         public TokenService(IConfiguration config)
@@ -17,18 +21,16 @@ namespace api.Service
             _config = config;
             _key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["JWT:SigningKey"]));
         }
-
         public string CreateToken(AppUser user)
         {
             var claims = new List<Claim>
             {
                 new Claim(JwtRegisteredClaimNames.Email, user.Email!),
-                new Claim(JwtRegisteredClaimNames.GivenName, user.UserName!),
+                new Claim(JwtRegisteredClaimNames.GivenName, user.UserName!)
             };
 
             var creds = new SigningCredentials(_key, SecurityAlgorithms.HmacSha512Signature);
 
-            //steps to create the token
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(claims),
@@ -39,11 +41,10 @@ namespace api.Service
             };
 
             var tokenHandler = new JwtSecurityTokenHandler();
+
             var token = tokenHandler.CreateToken(tokenDescriptor);
 
-            //Return the token as a string
-            return tokenHandler.WriteToken(token); 
+            return tokenHandler.WriteToken(token);
         }
-
     }
 }
