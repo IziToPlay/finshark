@@ -56,7 +56,7 @@ const RegisterPage = (props: Props) => {
                   {...register("email")}
                 />
                 {errors.email ? (
-                  <p className="text-white">{errors.email.message}</p>
+                  <p className="text-red-600">{errors.email.message}</p>
                 ) : (
                   ""
                 )}
@@ -76,7 +76,7 @@ const RegisterPage = (props: Props) => {
                   {...register("userName")}
                 />
                 {errors.userName ? (
-                  <p className="text-white">{errors.userName.message}</p>
+                  <p className="text-red-600">{errors.userName.message}</p>
                 ) : (
                   ""
                 )}
@@ -96,18 +96,20 @@ const RegisterPage = (props: Props) => {
                   {...register("password")}
                 />
                 {errors.password ? (
-                  <p className="text-white">{errors.password.message}</p>
+                  <p className="text-red-600">{errors.password.message}</p>
                 ) : (
                   ""
                 )}
               </div>
               <div className="flex items-center justify-between">
-                <a
-                  href="#"
-                  className="text-sm text-white font-medium text-primary-600 hover:underline dark:text-primary-500"
-                >
-                  Forgot password?
-                </a>
+                <p className="text-sm font-light text-gray-500 dark:text-gray-400">
+                  <a
+                    href="#"
+                    className="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500"
+                  >
+                    Forgot password?
+                  </a>
+                </p>
               </div>
               <button
                 type="submit"

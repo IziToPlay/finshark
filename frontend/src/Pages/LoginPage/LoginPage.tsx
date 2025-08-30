@@ -54,7 +54,7 @@ const LoginPage = (props: Props) => {
                   {...register("userName")}
                 />
                 {errors.userName ? (
-                  <p className="text-white">{errors.userName.message}</p>
+                  <p className="text-red-600">{errors.userName.message}</p>
                 ) : (
                   ""
                 )}
@@ -74,18 +74,20 @@ const LoginPage = (props: Props) => {
                   {...register("password")}
                 />
                 {errors.password ? (
-                  <p className="text-white">{errors.password.message}</p>
+                  <p className="text-red-600">{errors.password.message}</p>
                 ) : (
                   ""
                 )}
               </div>
               <div className="flex items-center justify-between">
+                <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                 <a
                   href="#"
-                  className="text-sm text-white font-medium text-primary-600 hover:underline dark:text-primary-500"
+                  className="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500"
                 >
                   Forgot password?
                 </a>
+                </p>
               </div>
               <button
                 type="submit"
@@ -96,7 +98,7 @@ const LoginPage = (props: Props) => {
               <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                 Don’t have an account yet?{" "}
                 <a
-                  href="#"
+                  href="register"
                   className="font-medium text-primary-600 hover:underline dark:text-primary-500"
                 >
                   Sign up

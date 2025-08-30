@@ -40,7 +40,7 @@ const StockCommentForm = ({ symbol, handleComment }: Props) => {
         placeholder="Title"
         {...register("title")}
       />
-      {errors.title ? <p>{errors.title.message}</p> : ""}
+      {errors.title ? <p className="text-red-600">{errors.title.message}</p> : ""}
       <div className="py-2 px-4 mb-4 bg-white rounded-lg rounded-t-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700">
         <label htmlFor="comment" className="sr-only">
           Your comment
@@ -53,7 +53,7 @@ const StockCommentForm = ({ symbol, handleComment }: Props) => {
           {...register("content")}
         ></textarea>
       </div>
-      {errors.content ? <p>{errors.content.message}</p> : ""}
+      {errors.content ? <p className="text-red-600">{errors.content.message}</p> : ""}
 
       <button
         type="submit"
